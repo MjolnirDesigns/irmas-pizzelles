@@ -1,0 +1,76 @@
+You are an expert full-stack web developer tasked with building a complete, functional e-commerce website for an Italian dessert cookie business called "Irma's Pizzelles." The site must be deployable on platforms like Replit (using Node.js, Express, React, and MongoDB) or no-code/low-code alternatives like Bubble.io (if "Base44" refers to a similar platform; adapt accordingly). Focus on a premium luxury baked goods aesthetic with traditional Italian style: use elegant fonts (e.g., serif like Playfair Display for headings, sans-serif like Lato for body), a color palette of warm earth tones (creams, golds, deep reds, greens), high-quality images of pizzelles, subtle Italian motifs (e.g., vine patterns, rustic textures), responsive design for mobile/desktop, and clean, minimalist layouts with ample whitespace.
+Project Overview
+
+Business Functionality: Sell pizzelles in orders of 1-5 dozen (max per order). Include a landing page, waitlist signup, user registration/login, shopping cart, checkout with shipping info collection, payment processing, order processing, automated email receipts, and admin tools for printing shipping labels.
+Tech Stack:
+Front-End: React.js (with React Router for navigation), CSS (via styled-components or Tailwind CSS for styling), Axios for API calls.
+Back-End: Node.js with Express.js for server, MongoDB (via Mongoose) for database to store users, orders, and waitlist.
+Libraries/Tools:
+Authentication: JWT or Passport.js.
+Payments: Integrate Stripe for online payments (handle card processing, no storage of card details).
+Emails: Nodemailer or SendGrid for automated order receipts.
+Shipping: Integrate Shippo or EasyPost API for generating and printing shipping labels (admin-only).
+Database: MongoDB Atlas (free tier) for cloud hosting.
+Other: dotenv for environment variables, bcrypt for password hashing, multer for any image uploads (e.g., product photos), CORS for front-back communication.
+
+Deployment: Ensure the app runs on Replit (use Replit's secrets for API keys). For Bubble.io adaptation: Use built-in UI elements, database, workflows for logic, and plugins for Stripe/SendGrid/Shippo.
+
+Security: Implement HTTPS, input validation, rate limiting, secure payment handling (PCI compliance via Stripe), and protect against common vulnerabilities (e.g., XSS, SQL injection via parameterized queries).
+Performance: Optimize for fast loading (lazy-load images, minify assets), SEO (meta tags, sitemap), and accessibility (ARIA labels, alt text for images).
+
+Key Pages and Features
+
+Landing Page:
+Hero section: High-res image of pizzelles with overlay text "Irma's Pizzelles: Authentic Italian Delights" and tagline "Handcrafted with love, delivered fresh."
+Sections: About (story of Irma's traditional recipes), Products (display pizzelle options with descriptions, prices e.g., $20/dozen), Testimonials, FAQ.
+Call-to-Action: "Join Waitlist" button leading to signup form; "Shop Now" if products are available.
+Footer: Contact info, social links, privacy policy, terms of service.
+
+Join Waitlist Function:
+Simple form: Collect name, email, optional phone/zip for shipping estimates.
+Store in database; send confirmation email.
+Front-end: React form with validation (email format, required fields).
+
+User Authentication:
+Signup/Login pages: Email/password, with forgot password (email reset link).
+Store user data securely in MongoDB (hashed passwords).
+
+Product/Order System:
+Shop page: List pizzelles (flavors like anise, vanilla); quantity selector (1-5 dozen, enforce max).
+Cart: Add/remove items, calculate totals (subtotal, tax, shipping estimate).
+Checkout: Form for shipping address (name, street, city, state, zip, country), billing info (integrated with Stripe).
+Order limits: Max 5 dozen total per order; validate on front and back-end.
+
+Back-End Processing:
+API Endpoints (Express routes):
+GET /products: Fetch product list.
+POST /waitlist: Add to waitlist.
+POST /orders: Create order, process payment via Stripe webhook.
+GET /orders/:id: Fetch order details (user/admin).
+POST /labels: Generate shipping label via Shippo (admin route, authenticated).
+
+Database Schemas (Mongoose):
+User: { email, passwordHash, name, address }
+Waitlist: { name, email, phone, zip }
+Order: { userId, items:[{product, qty}], total, status (pending/shipped), shippingAddress, tracking }
+
+Payment Flow: Use Stripe Checkout or Elements; handle success/failure webhooks to update order status.
+Email Automation: On order confirmation, send receipt with order details, total, tracking (once shipped).
+Shipping: Admin dashboard to view orders, generate/print labels (PDF via Shippo), update status.
+
+Admin Dashboard:
+Protected route: View/manage orders, waitlist, inventory (simple stock tracking for pizzelles).
+Tools: Print shipping labels, export orders to CSV.
+
+
+Development Steps
+
+Set up project structure: Separate front-end (client folder with React) and back-end (server folder with Express).
+Install dependencies: npm init, install express, mongoose, stripe, nodemailer, etc. for back; create-react-app for front.
+Environment Setup: Use .env for API keys (Stripe secret, Mongo URI, email creds).
+Testing: Unit tests for APIs (Jest), e2e tests (Cypress if time), manual testing for payments (Stripe test mode).
+Design Elements: Use Google Fonts for Playfair Display/Lato; icons from Font Awesome; images from Unsplash (Italian bakery themes).
+Responsiveness: Media queries or Tailwind for mobile-first design.
+Analytics: Optional Google Analytics integration for traffic tracking.
+
+Build the entire application step-by-step, providing the full code structure, including sample code snippets for key components (e.g., React components, Express routes, database models). Ensure it's ready to launch with minimal tweaks, and include instructions for deploying on Replit (run server and client separately) or Bubble.io (drag-drop UI, set up workflows). If using Replit, handle port configuration for web serving. Output the complete code or Bubble setup guide.
