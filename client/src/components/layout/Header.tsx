@@ -24,7 +24,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-6 md:px-8">
         <Link href="/" className="flex items-center gap-2">
-          <span className="font-serif text-2xl tracking-wide" data-testid="logo-text">
+          <span className="font-serif text-2xl font-semibold tracking-wide" data-testid="logo-text">
             Irma's Pizzelles
           </span>
         </Link>

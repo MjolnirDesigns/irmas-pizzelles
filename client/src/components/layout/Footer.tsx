@@ -63,7 +63,7 @@ export default function Footer() {
       <div className="container mx-auto px-6 md:px-8 pt-12 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
-            <h3 className="font-serif text-xl font-semibold mb-4" data-testid="footer-brand">Irma's Pizzelles</h3>
+            <h3 className="font-serif text-xl font-bold mb-4" data-testid="footer-brand">Irma's Pizzelles</h3>
             <p className="font-body-serif text-muted-foreground text-base leading-relaxed">
               Handcrafted with love using traditional Italian recipes passed down through generations.
             </p>

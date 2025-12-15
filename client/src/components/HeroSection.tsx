@@ -13,7 +13,7 @@ export default function HeroSection() {
       
       <div className="relative z-10 container mx-auto px-6 md:px-8 text-center">
         <h1 
-          className="font-serif text-5xl md:text-7xl text-white mb-6 leading-tight tracking-wide"
+          className="font-serif text-5xl md:text-7xl font-bold text-white mb-6 leading-tight tracking-wide"
           data-testid="text-hero-title"
         >
           Irma's Pizzelles

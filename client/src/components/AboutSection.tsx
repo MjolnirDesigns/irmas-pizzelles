@@ -6,7 +6,7 @@ export default function AboutSection() {
       <div className="container mx-auto px-6 md:px-8">
         <div className="text-center mb-12">
           <h2 
-            className="font-serif text-3xl md:text-4xl tracking-wide mb-2"
+            className="font-serif text-3xl md:text-4xl font-bold tracking-wide mb-2"
             data-testid="text-about-title"
           >
             About Irma's
@@ -20,7 +20,7 @@ export default function AboutSection() {
           <div className="order-2 lg:order-1">
             <div className="space-y-6">
               <div data-testid="text-about-origins">
-                <h3 className="font-serif text-xl tracking-wide mb-2">Origins</h3>
+                <h3 className="font-serif text-xl font-semibold tracking-wide mb-2">Origins</h3>
                 <p className="font-body-serif text-base md:text-lg text-muted-foreground leading-relaxed">
                   Irma's journey began in the small town of Calabria, Italy. There, the Italian dessert 
                   cookie tradition was born. Pizzelles were a common favorite among the many grandchildren, 
@@ -29,7 +29,7 @@ export default function AboutSection() {
               </div>
               
               <div data-testid="text-about-tradition">
-                <h3 className="font-serif text-xl tracking-wide mb-2">Tradition</h3>
+                <h3 className="font-serif text-xl font-semibold tracking-wide mb-2">Tradition</h3>
                 <p className="font-body-serif text-base md:text-lg text-muted-foreground leading-relaxed">
                   Irma migrated with her family to America in the early 1920's during the first World War. 
                   The family recipe and tradition would continue to bring happiness to America.
@@ -37,7 +37,7 @@ export default function AboutSection() {
               </div>
               
               <div data-testid="text-about-promise">
-                <h3 className="font-serif text-xl tracking-wide mb-2">Our Promise</h3>
+                <h3 className="font-serif text-xl font-semibold tracking-wide mb-2">Our Promise</h3>
                 <p className="font-body-serif text-base md:text-lg text-muted-foreground leading-relaxed">
                   Irma's legacy of creating delicious Italian dessert cookies remains the core of our family 
                   business. We use the highest quality ingredients and take extreme care to deliver our product 
