@@ -3,14 +3,30 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { CartProvider } from "@/lib/cart-context";
+import { ThemeProvider } from "@/lib/theme-context";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import CartSlideOver from "@/components/CartSlideOver";
+import Home from "@/pages/home";
+import Shop from "@/pages/shop";
+import About from "@/pages/about";
+import FAQ from "@/pages/faq";
+import Waitlist from "@/pages/waitlist";
+import Checkout from "@/pages/checkout";
+import Account from "@/pages/account";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
-      {/* Add pages below */}
-      {/* <Route path="/" component={Home}/> */}
-      {/* Fallback to 404 */}
+      <Route path="/" component={Home} />
+      <Route path="/shop" component={Shop} />
+      <Route path="/about" component={About} />
+      <Route path="/faq" component={FAQ} />
+      <Route path="/waitlist" component={Waitlist} />
+      <Route path="/checkout" component={Checkout} />
+      <Route path="/account" component={Account} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -19,10 +35,21 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Router />
-      </TooltipProvider>
+      <ThemeProvider>
+        <CartProvider>
+          <TooltipProvider>
+            <div className="min-h-screen flex flex-col bg-background">
+              <Header />
+              <div className="flex-1">
+                <Router />
+              </div>
+              <Footer />
+              <CartSlideOver />
+            </div>
+            <Toaster />
+          </TooltipProvider>
+        </CartProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
