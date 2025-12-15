@@ -7,6 +7,7 @@ import { CartProvider } from "@/lib/cart-context";
 import { ThemeProvider } from "@/lib/theme-context";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import PromoBanner from "@/components/PromoBanner";
 import CartSlideOver from "@/components/CartSlideOver";
 import Home from "@/pages/home";
 import Shop from "@/pages/shop";
@@ -39,6 +40,7 @@ function App() {
         <CartProvider>
           <TooltipProvider>
             <div className="min-h-screen flex flex-col bg-background">
+              <PromoBanner />
               <Header />
               <div className="flex-1">
                 <Router />

@@ -1,38 +1,211 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import { db } from "./db";
+import { eq, and, sql, desc } from "drizzle-orm";
+import {
+  users, type User, type InsertUser,
+  products, type Product, type InsertProduct,
+  orders, type Order, type InsertOrder,
+  orderItems, type OrderItem, type InsertOrderItem,
+  promotions, type Promotion, type InsertPromotion,
+  addresses, type Address, type InsertAddress,
+  waitlistEntries, type WaitlistEntry, type InsertWaitlistEntry,
+} from "@shared/schema";
 
 export interface IStorage {
+  // Users
   getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
+  getUserByReplitId(replitId: string): Promise<User | undefined>;
+  getUserByEmail(email: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  updateUser(id: string, data: Partial<InsertUser>): Promise<User | undefined>;
+  
+  // Products
+  getProducts(activeOnly?: boolean): Promise<Product[]>;
+  getProductById(id: string): Promise<Product | undefined>;
+  getProductBySlug(slug: string): Promise<Product | undefined>;
+  getFeaturedProducts(): Promise<Product[]>;
+  createProduct(product: InsertProduct): Promise<Product>;
+  updateProduct(id: string, data: Partial<InsertProduct>): Promise<Product | undefined>;
+  
+  // Orders
+  getOrders(): Promise<Order[]>;
+  getOrderById(id: string): Promise<Order | undefined>;
+  getOrderByOrderNumber(orderNumber: string): Promise<Order | undefined>;
+  getOrdersByUserId(userId: string): Promise<Order[]>;
+  createOrder(order: InsertOrder): Promise<Order>;
+  updateOrder(id: string, data: Partial<InsertOrder>): Promise<Order | undefined>;
+  
+  // Order Items
+  getOrderItems(orderId: string): Promise<OrderItem[]>;
+  createOrderItem(item: InsertOrderItem): Promise<OrderItem>;
+  
+  // Promotions
+  getPromotionByCode(code: string): Promise<Promotion | undefined>;
+  incrementPromotionRedemptions(id: string): Promise<void>;
+  
+  // Addresses
+  getAddressesByUserId(userId: string): Promise<Address[]>;
+  createAddress(address: InsertAddress): Promise<Address>;
+  updateAddress(id: string, data: Partial<InsertAddress>): Promise<Address | undefined>;
+  deleteAddress(id: string): Promise<void>;
+  
+  // Waitlist
+  addToWaitlist(entry: InsertWaitlistEntry): Promise<WaitlistEntry>;
+  getWaitlistEntry(email: string): Promise<WaitlistEntry | undefined>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
-  }
-
+export class DatabaseStorage implements IStorage {
+  // Users
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+  async getUserByReplitId(replitId: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.replitId, replitId));
+    return user;
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
+    return user;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db.insert(users).values(insertUser).returning();
     return user;
+  }
+
+  async updateUser(id: string, data: Partial<InsertUser>): Promise<User | undefined> {
+    const [user] = await db.update(users).set(data).where(eq(users.id, id)).returning();
+    return user;
+  }
+
+  // Products
+  async getProducts(activeOnly = true): Promise<Product[]> {
+    if (activeOnly) {
+      return db.select().from(products).where(eq(products.isActive, true));
+    }
+    return db.select().from(products);
+  }
+
+  async getProductById(id: string): Promise<Product | undefined> {
+    const [product] = await db.select().from(products).where(eq(products.id, id));
+    return product;
+  }
+
+  async getProductBySlug(slug: string): Promise<Product | undefined> {
+    const [product] = await db.select().from(products).where(eq(products.slug, slug));
+    return product;
+  }
+
+  async getFeaturedProducts(): Promise<Product[]> {
+    return db.select().from(products).where(
+      and(eq(products.isActive, true), eq(products.isFeatured, true))
+    );
+  }
+
+  async createProduct(product: InsertProduct): Promise<Product> {
+    const [created] = await db.insert(products).values(product).returning();
+    return created;
+  }
+
+  async updateProduct(id: string, data: Partial<InsertProduct>): Promise<Product | undefined> {
+    const [updated] = await db.update(products).set(data).where(eq(products.id, id)).returning();
+    return updated;
+  }
+
+  // Orders
+  async getOrders(): Promise<Order[]> {
+    return db.select().from(orders).orderBy(desc(orders.createdAt));
+  }
+
+  async getOrderById(id: string): Promise<Order | undefined> {
+    const [order] = await db.select().from(orders).where(eq(orders.id, id));
+    return order;
+  }
+
+  async getOrderByOrderNumber(orderNumber: string): Promise<Order | undefined> {
+    const [order] = await db.select().from(orders).where(eq(orders.orderNumber, orderNumber));
+    return order;
+  }
+
+  async getOrdersByUserId(userId: string): Promise<Order[]> {
+    return db.select().from(orders).where(eq(orders.userId, userId)).orderBy(desc(orders.createdAt));
+  }
+
+  async createOrder(order: InsertOrder): Promise<Order> {
+    const orderNumber = `IP${Date.now().toString(36).toUpperCase()}`;
+    const [created] = await db.insert(orders).values({
+      ...order,
+      orderNumber,
+    }).returning();
+    return created;
+  }
+
+  async updateOrder(id: string, data: Partial<InsertOrder>): Promise<Order | undefined> {
+    const [updated] = await db.update(orders).set({
+      ...data,
+      updatedAt: new Date(),
+    }).where(eq(orders.id, id)).returning();
+    return updated;
+  }
+
+  // Order Items
+  async getOrderItems(orderId: string): Promise<OrderItem[]> {
+    return db.select().from(orderItems).where(eq(orderItems.orderId, orderId));
+  }
+
+  async createOrderItem(item: InsertOrderItem): Promise<OrderItem> {
+    const [created] = await db.insert(orderItems).values(item).returning();
+    return created;
+  }
+
+  // Promotions
+  async getPromotionByCode(code: string): Promise<Promotion | undefined> {
+    const [promo] = await db.select().from(promotions).where(
+      and(
+        eq(promotions.code, code.toUpperCase()),
+        eq(promotions.isActive, true)
+      )
+    );
+    return promo;
+  }
+
+  async incrementPromotionRedemptions(id: string): Promise<void> {
+    await db.update(promotions).set({
+      currentRedemptions: sql`${promotions.currentRedemptions} + 1`,
+    }).where(eq(promotions.id, id));
+  }
+
+  // Addresses
+  async getAddressesByUserId(userId: string): Promise<Address[]> {
+    return db.select().from(addresses).where(eq(addresses.userId, userId));
+  }
+
+  async createAddress(address: InsertAddress): Promise<Address> {
+    const [created] = await db.insert(addresses).values(address).returning();
+    return created;
+  }
+
+  async updateAddress(id: string, data: Partial<InsertAddress>): Promise<Address | undefined> {
+    const [updated] = await db.update(addresses).set(data).where(eq(addresses.id, id)).returning();
+    return updated;
+  }
+
+  async deleteAddress(id: string): Promise<void> {
+    await db.delete(addresses).where(eq(addresses.id, id));
+  }
+
+  // Waitlist
+  async addToWaitlist(entry: InsertWaitlistEntry): Promise<WaitlistEntry> {
+    const [created] = await db.insert(waitlistEntries).values(entry).returning();
+    return created;
+  }
+
+  async getWaitlistEntry(email: string): Promise<WaitlistEntry | undefined> {
+    const [entry] = await db.select().from(waitlistEntries).where(eq(waitlistEntries.email, email));
+    return entry;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
