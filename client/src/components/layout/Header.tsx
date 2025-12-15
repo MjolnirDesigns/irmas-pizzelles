@@ -9,8 +9,8 @@ import { useTheme } from '@/lib/theme-context';
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/shop', label: 'Shop' },
   { href: '/about', label: 'About' },
+  { href: '/shop', label: 'Shop' },
   { href: '/faq', label: 'FAQ' },
 ];
 
