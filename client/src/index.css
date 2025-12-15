@@ -44,8 +44,14 @@
   --chart-4: 42 65% 48%;
   --chart-5: 48 60% 42%;
   --font-sans: Lato, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-serif: 'Italiana', 'Playfair Display', Georgia, serif;
+  --font-body-serif: 'Cormorant Garamond', Georgia, serif;
   --font-mono: Menlo, monospace;
+  --italian-green: 0 146 70;
+  --italian-white: 241 242 241;
+  --italian-red: 206 43 55;
+  --american-red: 191 10 48;
+  --american-blue: 0 40 104;
   --radius: .5rem;
   --shadow-2xs: 0px 2px 0px 0px hsl(20 6% 10% / 0.00);
   --shadow-xs: 0px 2px 0px 0px hsl(20 6% 10% / 0.00);

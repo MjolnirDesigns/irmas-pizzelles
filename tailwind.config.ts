@@ -81,10 +81,20 @@ export default {
           busy: "rgb(239 68 68)",
           offline: "rgb(156 163 175)",
         },
+        italian: {
+          green: "rgb(var(--italian-green) / <alpha-value>)",
+          white: "rgb(var(--italian-white) / <alpha-value>)",
+          red: "rgb(var(--italian-red) / <alpha-value>)",
+        },
+        american: {
+          red: "rgb(var(--american-red) / <alpha-value>)",
+          blue: "rgb(var(--american-blue) / <alpha-value>)",
+        },
       },
       fontFamily: {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],
+        "body-serif": ["var(--font-body-serif)"],
         mono: ["var(--font-mono)"],
       },
       keyframes: {

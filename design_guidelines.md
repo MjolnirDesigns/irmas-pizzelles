@@ -33,23 +33,44 @@ Drawing inspiration from luxury food retailers (Eataly, Goldbelly) combined with
 
 ## Typography System
 
-**Primary Font: Playfair Display (serif)**
-- Major headings: 700 weight (H1: text-5xl md:text-7xl, H2: text-4xl md:text-5xl)
-- Subheadings: 600 weight (H3: text-2xl md:text-3xl)
-- Creates elegant, traditional Italian character
+**Primary Heading Font: Italiana (serif)**
+- Major headings and logo: tracking-wide (H1: text-5xl md:text-7xl, H2: text-4xl md:text-5xl)
+- Section headings: tracking-wide (H3: text-2xl md:text-3xl)
+- Creates elegant, refined Italian character with classic letterforms
 
-**Secondary Font: Lato (sans-serif)**
-- Body text: 400 weight (text-base md:text-lg, leading-relaxed)
+**Body Serif Font: Cormorant Garamond**
+- H2 descriptions and body paragraphs: 400-700 weight, text-base md:text-lg
+- Italicized subtitles and taglines for elegant emphasis
+- Rich, readable text with classic Italian old-style feel
+
+**UI Font: Lato (sans-serif)**
 - UI elements, buttons, navigation: 400-600 weights
 - Form fields: 400 weight
 - Small text: text-sm
 
 **Hierarchy:**
-- Hero headlines: Playfair Display, 700, text-5xl md:text-7xl
-- Section headings: Playfair Display, 700, text-3xl md:text-4xl
-- Product titles: Playfair Display, 600, text-xl md:text-2xl
-- Body content: Lato, 400, text-base, leading-relaxed
-- Buttons/CTAs: Lato, 600, text-base md:text-lg, uppercase, tracking-wide
+- Hero headlines: Italiana, tracking-wide, text-5xl md:text-7xl
+- Section headings: Italiana, tracking-wide, text-3xl md:text-4xl
+- Product titles: Italiana, tracking-wide, text-xl md:text-2xl
+- Subtitles/taglines: Cormorant Garamond, italic
+- Body content: Cormorant Garamond, 400, text-base md:text-lg, leading-relaxed
+- Buttons/CTAs: Lato, 600, text-base md:text-lg
+
+## Italian-American Heritage Colors
+
+**Italian Flag Colors:**
+- Italian Green: rgb(0 146 70) - used for heritage accents
+- Italian White: rgb(241 242 241)
+- Italian Red: rgb(206 43 55) - used for heritage accents
+
+**American Flag Colors:**
+- American Red: rgb(191 10 48)
+- American Blue: rgb(0 40 104)
+
+**Heritage Integration:**
+- Footer heritage stripe with both flags
+- Subtle gradient backgrounds with Italian green/red tints
+- "From Italy to America" tagline tribute
 
 ---
 

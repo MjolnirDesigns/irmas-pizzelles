@@ -13,19 +13,19 @@ export default function HeroSection() {
       
       <div className="relative z-10 container mx-auto px-6 md:px-8 text-center">
         <h1 
-          className="font-serif text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
+          className="font-serif text-5xl md:text-7xl text-white mb-6 leading-tight tracking-wide"
           data-testid="text-hero-title"
         >
           Irma's Pizzelles
         </h1>
         <p 
-          className="text-xl md:text-2xl text-white/90 mb-4 font-light"
+          className="font-body-serif text-xl md:text-2xl text-white/90 mb-4 italic"
           data-testid="text-hero-subtitle"
         >
           Authentic Italian Delights
         </p>
         <p 
-          className="text-lg text-white/80 mb-10 max-w-xl mx-auto"
+          className="font-body-serif text-lg text-white/80 mb-10 max-w-xl mx-auto"
           data-testid="text-hero-tagline"
         >
           Handcrafted with love, delivered fresh to your door
