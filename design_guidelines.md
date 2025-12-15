@@ -13,26 +13,43 @@ Drawing inspiration from luxury food retailers (Eataly, Goldbelly) combined with
 
 ---
 
+## Color System
+
+**Base Palette:**
+- Background: Cream/ivory (warm off-white)
+- Primary accent: Rich gold/amber for CTAs, highlights, and premium touches
+- Secondary: Earthy warm brown for text, borders, and grounding elements
+- Neutral: Soft beige and warm gray for cards and sections
+
+**Application:**
+- Hero overlay: Semi-transparent warm brown backdrop with blur
+- Buttons: Gold/amber fill with warm brown text, or warm brown outline on transparent blurred backgrounds
+- Product cards: Cream backgrounds with subtle warm shadows
+- Section alternation: Cream and very light beige for visual rhythm
+- Text hierarchy: Warm brown for body, darker brown for headings
+- Accents: Gold for badges, special offers, "New" labels, premium indicators
+
+---
+
 ## Typography System
 
 **Primary Font: Playfair Display (serif)**
-- Headings: 700 weight for major headings (H1: text-5xl md:text-7xl, H2: text-4xl md:text-5xl)
+- Major headings: 700 weight (H1: text-5xl md:text-7xl, H2: text-4xl md:text-5xl)
 - Subheadings: 600 weight (H3: text-2xl md:text-3xl)
 - Creates elegant, traditional Italian character
 
 **Secondary Font: Lato (sans-serif)**
-- Body text: 400 weight (text-base md:text-lg)
+- Body text: 400 weight (text-base md:text-lg, leading-relaxed)
 - UI elements, buttons, navigation: 400-600 weights
-- Form labels and inputs: 400 weight
-- Small text/captions: text-sm
-- Ensures excellent readability for product details and checkout flows
+- Form fields: 400 weight
+- Small text: text-sm
 
 **Hierarchy:**
 - Hero headlines: Playfair Display, 700, text-5xl md:text-7xl
 - Section headings: Playfair Display, 700, text-3xl md:text-4xl
 - Product titles: Playfair Display, 600, text-xl md:text-2xl
-- Body content: Lato, 400, text-base with increased line-height (leading-relaxed)
-- Buttons/CTAs: Lato, 600, text-base md:text-lg, uppercase tracking-wide
+- Body content: Lato, 400, text-base, leading-relaxed
+- Buttons/CTAs: Lato, 600, text-base md:text-lg, uppercase, tracking-wide
 
 ---
 
@@ -40,113 +57,78 @@ Drawing inspiration from luxury food retailers (Eataly, Goldbelly) combined with
 
 **Spacing Scale: Tailwind units of 3, 4, 6, 8, 12, 16, 20, 24**
 - Component padding: p-6 to p-8
-- Section spacing: py-16 md:py-24
+- Section spacing: py-20 md:py-32
 - Card gaps: gap-6 md:gap-8
-- Form field spacing: space-y-4 to space-y-6
-- Container max-width: max-w-7xl for full sections, max-w-4xl for content-focused areas
+- Form spacing: space-y-4 to space-y-6
+- Containers: max-w-7xl for sections, max-w-4xl for content, max-w-2xl for forms
 
 **Grid Systems:**
 - Product grids: grid-cols-1 md:grid-cols-2 lg:grid-cols-3
 - Feature sections: grid-cols-1 md:grid-cols-2
-- Checkout flow: Single column max-w-2xl for forms
-- Cart: Two-column split (items + summary) on desktop
+- Testimonials: grid-cols-1 md:grid-cols-3
 
 ---
 
 ## Component Library
 
 ### Navigation
-- Sticky header with logo (left), navigation links (center), cart icon with badge (right)
-- Mobile: Hamburger menu with full-screen overlay
-- Account dropdown for logged-in users
-- Spacing: px-6 md:px-8, py-4
+Sticky header with logo (left), navigation links (center), cart icon with badge (right). Mobile hamburger menu with full-screen overlay. Account dropdown for logged users. Spacing: px-6 md:px-8, py-4.
 
-### Hero Section (Landing Page)
-- Full-width hero: Large background image of freshly made pizzelles with warm lighting
-- Height: min-h-[70vh] md:min-h-[85vh]
-- Overlay with centered content: Headline + tagline + dual CTAs
-- Primary CTA: "Shop Now" with blurred background backdrop-blur-sm
-- Secondary CTA: "Join Waitlist" outlined style with blurred background
-- Buttons: Large sizing (px-8 py-4), rounded-full for soft Italian aesthetic
+### Hero Section
+Full-width hero image (min-h-[70vh] md:min-h-[85vh]) featuring freshly made pizzelles with warm kitchen lighting. Centered overlay content with headline, tagline, and dual CTAs. Buttons have blurred warm brown backdrop (backdrop-blur-sm). Primary CTA: "Shop Now" (gold fill), Secondary: "Join Waitlist" (outlined, transparent with blur). Button sizing: px-8 py-4, rounded-full.
 
 ### Product Cards
-- Card structure: Image top (aspect-square), content below with p-6
-- Hover: Subtle lift effect (hover:shadow-lg transition-shadow)
-- Image: Full-bleed with soft rounded corners (rounded-lg)
-- Content: Product name (Playfair), price (bold, Lato), flavor description
-- Add to cart button: Full-width, rounded-lg
+Image top (aspect-square, rounded-lg), content below (p-6). Hover: subtle lift with enhanced shadow. Content includes product name (Playfair), price (bold Lato), flavor description, full-width "Add to Cart" button (rounded-lg).
+
+### Features Section (Why Choose Irma's)
+Three-column grid showcasing: "Family Recipe Since 1947", "Handcrafted Daily", "Premium Ingredients". Each card includes decorative icon, bold heading, and descriptive text.
 
 ### Shopping Cart
-- Slide-in panel from right (desktop) or full-screen (mobile)
-- Item rows: Product image (small), name, quantity selector, price, remove icon
-- Sticky footer: Subtotal, taxes, shipping estimate, checkout CTA
-- Empty state: Illustration with "Your cart is empty" message
+Slide-in panel (right on desktop, full-screen mobile). Item rows with thumbnail, name, quantity selector, price, remove icon. Sticky footer with subtotal, taxes, shipping estimate, checkout CTA. Empty state with warm messaging.
 
-### Forms (Waitlist, Checkout, Login)
-- Input fields: Rounded-lg borders, p-4, full-width
-- Labels: Above inputs, text-sm font-medium mb-2
-- Focus states: Ring treatment for accessibility
-- Button placement: Full-width on mobile, inline on desktop
-- Field groups: Shipping address uses 2-column grid for city/state/zip
+### Product Detail Page
+Two-column layout: large product image gallery (left, 60%), product information (right, 40%) with title, price, flavor selector, quantity, add-to-cart, and detailed description accordion.
 
-### Sections (About, Testimonials, FAQ)
-- About: Two-column layout (image + story text), asymmetric for visual interest
-- Testimonials: Three-column grid with customer quotes, names, and photos
-- FAQ: Accordion pattern with expandable answers, max-w-3xl centered
-- All sections: Generous py-20 md:py-32 spacing
+### Forms
+Rounded-lg inputs with p-4, labels above (text-sm, font-medium, mb-2). Focus ring states. Full-width buttons on mobile, inline on desktop. Address forms use 2-column grid for city/state/zip.
 
-### Admin Dashboard
-- Sidebar navigation (left), main content area (right)
-- Order table: Sortable columns, status badges, action buttons (print label, update status)
-- Filters: Date range, status dropdown, search by customer name/email
-- Compact spacing for data density: p-4 for cards, gap-4 for grids
+### About Section
+Asymmetric two-column: heritage image (left, 45%), story content (right, 55%) with founder quote, family history, and craftsmanship details. Includes decorative gold divider elements.
+
+### Testimonials
+Three-column grid with customer quotes, circular photos (200x200), names, and 5-star ratings displayed with gold stars.
+
+### FAQ Section
+Accordion pattern (max-w-3xl centered) with expandable answers, gold accent on active item.
+
+### Newsletter Section
+Centered content with compelling headline, inline form (email + submit), and trust indicator ("Join 5,000+ pizzelle lovers"). Gold submit button.
 
 ### Footer
-- Four-column grid: About/Contact, Quick Links, Newsletter Signup, Social Media
-- Newsletter: Inline form with email input + submit button
-- Bottom bar: Copyright, Privacy Policy, Terms of Service links
-- Spacing: pt-16 pb-8, with divider line above bottom bar
+Four-column grid: About/Contact, Quick Links, Newsletter, Social Media. Bottom bar with copyright and legal links. Spacing: pt-16 pb-8 with divider.
 
 ---
 
-## Images Strategy
+## Images
 
-**Hero Section:**
-- Large format image (1920x1200): Artisan pizzelles on cooling rack with warm kitchen lighting, shallow depth of field focusing on cookie texture and patterns
+**Hero Image (1920x1200):** Artisan pizzelles on cooling rack with warm kitchen lighting, shallow depth of field showcasing cookie texture and traditional patterns.
 
-**Product Images:**
-- Square format (800x800): Individual pizzelles showcasing different flavors, styled on elegant serving plates or rustic wooden boards
-- Lifestyle shots for variety descriptions
+**Product Images (800x800):** Individual pizzelles on elegant serving plates or rustic wooden boards, different flavors with lifestyle styling.
 
-**About Section:**
-- Rectangular image (1200x800): Traditional pizzelle iron or baker's hands preparing dough, emphasizing craftsmanship and heritage
+**About Section (1200x800):** Traditional pizzelle iron or baker's hands preparing dough, emphasizing heritage and craftsmanship.
 
-**Testimonial Photos:**
-- Circular headshots (200x200): Customer photos for authenticity
+**Testimonials (200x200):** Circular customer photos for authenticity.
 
-**Additional Supporting Images:**
-- Process shots for "How It's Made" section
-- Packaging imagery for shipping information
-- Gift presentation ideas for special occasions
+**Supporting Images:** Process shots for "How It's Made", gift packaging ideas, ingredient close-ups.
 
 ---
 
 ## Animations
 
-**Minimal and purposeful:**
-- Smooth page transitions (fade-in on load)
-- Cart slide-in animation (transform-x with smooth easing)
-- Product card hover lift (scale and shadow)
-- Form validation feedback (shake on error, checkmark on success)
-- No scroll-triggered animations to maintain elegance and performance
+Minimal: Page load fade-in, cart slide-in (smooth transform), product card hover lift (subtle scale + shadow), form validation feedback (shake error, checkmark success). No scroll-triggered effects.
 
 ---
 
 ## Accessibility
 
-- All images include descriptive alt text
-- Form inputs have associated labels (for attribute)
-- Keyboard navigation fully supported throughout
-- Focus indicators visible on all interactive elements
-- Color contrast ratios meet WCAG AA standards
-- ARIA labels for icon-only buttons (cart, menu toggle)
+Descriptive alt text on all images, form labels with for attributes, full keyboard navigation, visible focus indicators, WCAG AA contrast ratios, ARIA labels for icon-only buttons.
