@@ -23,7 +23,7 @@ export default function AboutSection() {
             <motion.div variants={staggerItemVariants} data-testid="text-about-origins">
               <h3 className="font-serif text-xl font-semibold tracking-wide mb-2">Origins</h3>
               <p className="font-body-serif text-base md:text-lg text-muted-foreground leading-relaxed">
-                Our story begins in the sun-drenched hills of Calabria, Italy, where Irma learned 
+                Our story begins in the hills of Calabria, Italy, where Irma learned 
                 pizzelle-making at her grandmother's side. These delicate cookies became treasured 
                 favorites among the grandchildren, and the family recipe spread throughout the region.
               </p>
