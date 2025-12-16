@@ -8,11 +8,13 @@ import type { Product } from '@shared/schema';
 import aniseImage from '@assets/generated_images/anise_pizzelle_product_shot.png';
 import vanillaImage from '@assets/generated_images/vanilla_pizzelle_product_shot.png';
 import chocolateImage from '@assets/generated_images/chocolate_pizzelle_product_shot.png';
+import cinnamonImage from '@assets/generated_images/cinnamon_pizzelle_product_shot.png';
 
 const imageMap: Record<string, string> = {
   'anise': aniseImage,
   'vanilla': vanillaImage,
   'chocolate': chocolateImage,
+  'cinnamon': cinnamonImage,
 };
 
 function getProductImage(product: Product): string {
@@ -44,8 +46,8 @@ export default function ProductsSection() {
         </FadeUp>
         
         {isLoading && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {[1, 2, 3].map((i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
+            {[1, 2, 3, 4].map((i) => (
               <div key={i} className="space-y-4">
                 <Skeleton className="aspect-square rounded-lg" />
                 <Skeleton className="h-6 w-3/4" />
@@ -63,7 +65,7 @@ export default function ProductsSection() {
         )}
 
         {products && products.length > 0 && (
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
             {products.map((product) => (
               <motion.div key={product.id} variants={staggerItemVariants}>
                 <ProductCard 
