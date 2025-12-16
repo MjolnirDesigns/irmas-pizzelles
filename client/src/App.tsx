@@ -9,6 +9,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PromoBanner from "@/components/PromoBanner";
 import CartSlideOver from "@/components/CartSlideOver";
+import Snowfall from "@/components/Snowfall";
 import Home from "@/pages/home";
 import Shop from "@/pages/shop";
 import About from "@/pages/about";
@@ -43,6 +44,7 @@ function App() {
       <ThemeProvider>
         <CartProvider>
           <TooltipProvider>
+            <Snowfall />
             <div className="min-h-screen flex flex-col bg-background">
               <PromoBanner />
               <Header />

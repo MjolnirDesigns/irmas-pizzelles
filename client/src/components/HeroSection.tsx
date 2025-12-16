@@ -1,6 +1,8 @@
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
+import { Gift, Snowflake } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { SplitTextReveal, FadeUp } from '@/components/ui/text-reveal';
 import heroImage from '@assets/generated_images/hero_pizzelle_cookies_display.png';
 
@@ -17,6 +19,17 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
       
       <div className="relative z-10 container mx-auto px-6 md:px-8 text-center">
+        <FadeUp delay={0.2}>
+          <Badge 
+            variant="secondary" 
+            className="mb-6 bg-red-700/90 text-white border-red-600 px-4 py-1.5"
+          >
+            <Snowflake className="w-3 h-3 mr-2" />
+            Holiday Season Special
+            <Gift className="w-3 h-3 ml-2" />
+          </Badge>
+        </FadeUp>
+        
         <h1 
           className="font-serif text-5xl md:text-7xl font-bold text-white mb-6 leading-tight tracking-wide"
           data-testid="text-hero-title"
@@ -40,7 +53,7 @@ export default function HeroSection() {
             className="font-body-serif text-lg text-white/80 mb-10 max-w-xl mx-auto"
             data-testid="text-hero-tagline"
           >
-            Handcrafted with love, delivered fresh to your door
+            The perfect holiday gift - handcrafted with love, delivered fresh to your door
           </p>
         </FadeUp>
         
@@ -49,10 +62,11 @@ export default function HeroSection() {
             <Link href="/shop">
               <Button 
                 size="lg" 
-                className="group px-8 py-6 text-lg rounded-full bg-primary/90 backdrop-blur-sm transition-all duration-300"
+                className="group px-8 py-6 text-lg rounded-full bg-red-700/90 backdrop-blur-sm transition-all duration-300"
                 data-testid="button-shop-now"
               >
-                <span className="relative z-10">Shop Now</span>
+                <Gift className="w-5 h-5 mr-2" />
+                <span className="relative z-10">Shop Holiday Gifts</span>
               </Button>
             </Link>
             <Link href="/waitlist">
