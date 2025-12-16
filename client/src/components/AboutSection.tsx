@@ -23,26 +23,34 @@ export default function AboutSection() {
             <motion.div variants={staggerItemVariants} data-testid="text-about-origins">
               <h3 className="font-serif text-xl font-semibold tracking-wide mb-2">Origins</h3>
               <p className="font-body-serif text-base md:text-lg text-muted-foreground leading-relaxed">
-                Irma's journey began in the small town of Calabria, Italy. There, the Italian dessert 
-                cookie tradition was born. Pizzelles were a common favorite among the many grandchildren, 
-                and the family recipe became popular in the region.
+                Our story begins in the sun-drenched hills of Calabria, Italy, where Irma first learned the 
+                ancient art of pizzelle-making at her grandmother's side. In those humble kitchens, the 
+                intoxicating aroma of anise and vanilla filled the air as generation after generation 
+                perfected the family recipe. These delicate Italian dessert cookies quickly became 
+                treasured favorites among the many grandchildren, and word of their exceptional taste 
+                spread throughout the region.
               </p>
             </motion.div>
             
             <motion.div variants={staggerItemVariants} data-testid="text-about-tradition">
               <h3 className="font-serif text-xl font-semibold tracking-wide mb-2">Tradition</h3>
               <p className="font-body-serif text-base md:text-lg text-muted-foreground leading-relaxed">
-                Irma migrated with her family to America in the early 1920's during the first World War. 
-                The family recipe and tradition would continue to bring happiness to America.
+                In the early 1920s, amidst the upheaval of the First World War, Irma and her family 
+                made the courageous journey across the Atlantic to America. Though they left their 
+                homeland behind, they carried with them something precious: the time-honored recipe 
+                and cherished traditions that would bring the warmth of Calabria to their new home 
+                and share that joy with countless others.
               </p>
             </motion.div>
             
             <motion.div variants={staggerItemVariants} data-testid="text-about-promise">
               <h3 className="font-serif text-xl font-semibold tracking-wide mb-2">Our Promise</h3>
               <p className="font-body-serif text-base md:text-lg text-muted-foreground leading-relaxed">
-                Irma's legacy of creating delicious Italian dessert cookies remains the core of our family 
-                business. We use the highest quality ingredients and take extreme care to deliver our product 
-                with love and satisfaction. From our famiglia to yours, enjoy Irma's Pizzelles!
+                Today, Irma's legacy lives on at the heart of our family business. We remain devoted 
+                to crafting each pizzelle with the same care and passion she brought to her kitchen 
+                over a century ago. Using only the finest ingredients and honoring the techniques 
+                passed down through generations, we pour love into every batch we create. From our 
+                famiglia to yours, we invite you to taste a piece of our heritage.
               </p>
             </motion.div>
           </StaggerContainer>
