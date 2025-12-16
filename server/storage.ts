@@ -8,6 +8,8 @@ import {
   promotions, type Promotion, type InsertPromotion,
   addresses, type Address, type InsertAddress,
   waitlistEntries, type WaitlistEntry, type InsertWaitlistEntry,
+  newsletterSubscribers, type NewsletterSubscriber, type InsertNewsletterSubscriber,
+  newsletterIssues, type NewsletterIssue, type InsertNewsletterIssue,
 } from "@shared/schema";
 
 export interface IStorage {
@@ -51,6 +53,19 @@ export interface IStorage {
   // Waitlist
   addToWaitlist(entry: InsertWaitlistEntry): Promise<WaitlistEntry>;
   getWaitlistEntry(email: string): Promise<WaitlistEntry | undefined>;
+  
+  // Newsletter
+  addNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber>;
+  getNewsletterSubscriber(email: string): Promise<NewsletterSubscriber | undefined>;
+  getNewsletterSubscriberByToken(token: string): Promise<NewsletterSubscriber | undefined>;
+  getActiveNewsletterSubscribers(): Promise<NewsletterSubscriber[]>;
+  updateNewsletterSubscriber(id: string, data: Partial<InsertNewsletterSubscriber>): Promise<NewsletterSubscriber | undefined>;
+  unsubscribeNewsletter(token: string): Promise<void>;
+  
+  // Newsletter Issues
+  createNewsletterIssue(issue: InsertNewsletterIssue): Promise<NewsletterIssue>;
+  getNewsletterIssues(): Promise<NewsletterIssue[]>;
+  updateNewsletterIssue(id: string, data: Partial<InsertNewsletterIssue>): Promise<NewsletterIssue | undefined>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -205,6 +220,53 @@ export class DatabaseStorage implements IStorage {
   async getWaitlistEntry(email: string): Promise<WaitlistEntry | undefined> {
     const [entry] = await db.select().from(waitlistEntries).where(eq(waitlistEntries.email, email));
     return entry;
+  }
+
+  // Newsletter
+  async addNewsletterSubscriber(subscriber: InsertNewsletterSubscriber): Promise<NewsletterSubscriber> {
+    const [created] = await db.insert(newsletterSubscribers).values(subscriber).returning();
+    return created;
+  }
+
+  async getNewsletterSubscriber(email: string): Promise<NewsletterSubscriber | undefined> {
+    const [subscriber] = await db.select().from(newsletterSubscribers).where(eq(newsletterSubscribers.email, email));
+    return subscriber;
+  }
+
+  async getNewsletterSubscriberByToken(token: string): Promise<NewsletterSubscriber | undefined> {
+    const [subscriber] = await db.select().from(newsletterSubscribers).where(eq(newsletterSubscribers.unsubscribeToken, token));
+    return subscriber;
+  }
+
+  async getActiveNewsletterSubscribers(): Promise<NewsletterSubscriber[]> {
+    return db.select().from(newsletterSubscribers).where(eq(newsletterSubscribers.status, "active"));
+  }
+
+  async updateNewsletterSubscriber(id: string, data: Partial<InsertNewsletterSubscriber>): Promise<NewsletterSubscriber | undefined> {
+    const [updated] = await db.update(newsletterSubscribers).set(data).where(eq(newsletterSubscribers.id, id)).returning();
+    return updated;
+  }
+
+  async unsubscribeNewsletter(token: string): Promise<void> {
+    await db.update(newsletterSubscribers).set({
+      status: "unsubscribed",
+      unsubscribedAt: new Date(),
+    }).where(eq(newsletterSubscribers.unsubscribeToken, token));
+  }
+
+  // Newsletter Issues
+  async createNewsletterIssue(issue: InsertNewsletterIssue): Promise<NewsletterIssue> {
+    const [created] = await db.insert(newsletterIssues).values(issue).returning();
+    return created;
+  }
+
+  async getNewsletterIssues(): Promise<NewsletterIssue[]> {
+    return db.select().from(newsletterIssues).orderBy(desc(newsletterIssues.createdAt));
+  }
+
+  async updateNewsletterIssue(id: string, data: Partial<InsertNewsletterIssue>): Promise<NewsletterIssue | undefined> {
+    const [updated] = await db.update(newsletterIssues).set(data).where(eq(newsletterIssues.id, id)).returning();
+    return updated;
   }
 }
 

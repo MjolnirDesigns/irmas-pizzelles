@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertProductSchema, insertAddressSchema, insertWaitlistEntrySchema } from "@shared/schema";
 import { z } from "zod";
+import { generateUnsubscribeToken, sendWeeklyNewsletter } from "./newsletter-service";
 
 // Middleware to get user from session (if authenticated)
 async function getUser(req: Request) {
@@ -360,6 +361,112 @@ export async function registerRoutes(
         return res.status(400).json({ error: error.errors });
       }
       res.status(500).json({ error: "Failed to join waitlist" });
+    }
+  });
+
+  // ============ NEWSLETTER API ============
+  
+  // Subscribe to newsletter
+  app.post("/api/newsletter/subscribe", async (req, res) => {
+    try {
+      const { email, firstName } = req.body;
+      
+      if (!email || !email.includes('@')) {
+        return res.status(400).json({ error: "Valid email is required" });
+      }
+
+      // Check if already subscribed
+      const existing = await storage.getNewsletterSubscriber(email);
+      if (existing) {
+        if (existing.status === 'active') {
+          return res.status(400).json({ error: "Email already subscribed" });
+        }
+        // Reactivate if previously unsubscribed
+        await storage.updateNewsletterSubscriber(existing.id, { status: 'active' });
+        return res.json({ message: "Welcome back! You've been resubscribed." });
+      }
+
+      const subscriber = await storage.addNewsletterSubscriber({
+        email,
+        firstName: firstName || null,
+        status: 'active',
+        unsubscribeToken: generateUnsubscribeToken(),
+      });
+
+      res.status(201).json({ 
+        message: "Successfully subscribed to our newsletter!",
+        subscriber: { email: subscriber.email }
+      });
+    } catch (error) {
+      console.error("Error subscribing to newsletter:", error);
+      res.status(500).json({ error: "Failed to subscribe" });
+    }
+  });
+
+  // Unsubscribe from newsletter
+  app.get("/api/newsletter/unsubscribe", async (req, res) => {
+    try {
+      const { token } = req.query;
+      
+      if (!token || typeof token !== 'string') {
+        return res.status(400).json({ error: "Invalid unsubscribe token" });
+      }
+
+      const subscriber = await storage.getNewsletterSubscriberByToken(token);
+      if (!subscriber) {
+        return res.status(404).json({ error: "Subscription not found" });
+      }
+
+      await storage.unsubscribeNewsletter(token);
+      res.json({ message: "Successfully unsubscribed from newsletter" });
+    } catch (error) {
+      console.error("Error unsubscribing:", error);
+      res.status(500).json({ error: "Failed to unsubscribe" });
+    }
+  });
+
+  // Trigger newsletter send (admin endpoint - in production, protect with auth)
+  app.post("/api/newsletter/send", async (req, res) => {
+    try {
+      const result = await sendWeeklyNewsletter();
+      res.json({
+        message: `Newsletter sent successfully to ${result.sentCount} subscribers`,
+        issueId: result.issueId,
+        sentCount: result.sentCount,
+      });
+    } catch (error) {
+      console.error("Error sending newsletter:", error);
+      res.status(500).json({ error: "Failed to send newsletter" });
+    }
+  });
+
+  // Get newsletter issues (admin)
+  app.get("/api/newsletter/issues", async (req, res) => {
+    try {
+      const issues = await storage.getNewsletterIssues();
+      res.json(issues);
+    } catch (error) {
+      console.error("Error fetching newsletter issues:", error);
+      res.status(500).json({ error: "Failed to fetch issues" });
+    }
+  });
+
+  // ============ RECIPE ACCESS API ============
+  
+  // Check if user has recipe access (must be authenticated)
+  app.get("/api/recipes/access", async (req, res) => {
+    try {
+      const user = await getUser(req);
+      if (!user) {
+        return res.status(401).json({ 
+          hasAccess: false, 
+          message: "Please sign in to access exclusive recipes" 
+        });
+      }
+      res.json({ hasAccess: true, user: { firstName: user.firstName } });
+    } catch (error) {
+      console.error("Error checking recipe access:", error);
+      res.status(500).json({ error: "Failed to check access" });
     }
   });
 

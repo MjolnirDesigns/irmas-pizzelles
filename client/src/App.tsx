@@ -16,6 +16,8 @@ import FAQ from "@/pages/faq";
 import Waitlist from "@/pages/waitlist";
 import Checkout from "@/pages/checkout";
 import Account from "@/pages/account";
+import Nutrition from "@/pages/nutrition";
+import Recipes from "@/pages/recipes";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -28,6 +30,8 @@ function Router() {
       <Route path="/waitlist" component={Waitlist} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/account" component={Account} />
+      <Route path="/nutrition" component={Nutrition} />
+      <Route path="/recipes" component={Recipes} />
       <Route component={NotFound} />
     </Switch>
   );

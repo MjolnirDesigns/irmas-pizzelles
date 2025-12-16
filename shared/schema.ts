@@ -209,3 +209,59 @@ export const insertWaitlistEntrySchema = createInsertSchema(waitlistEntries).omi
 });
 export type InsertWaitlistEntry = z.infer<typeof insertWaitlistEntrySchema>;
 export type WaitlistEntry = typeof waitlistEntries.$inferSelect;
+
+// Newsletter Subscribers
+export const newsletterSubscriberStatusEnum = pgEnum('newsletter_subscriber_status', [
+  'active',
+  'unsubscribed',
+  'bounced'
+]);
+
+export const newsletterSubscribers = pgTable("newsletter_subscribers", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  email: text("email").notNull().unique(),
+  firstName: text("first_name"),
+  status: newsletterSubscriberStatusEnum("status").default("active").notNull(),
+  unsubscribeToken: text("unsubscribe_token").notNull(),
+  subscribedAt: timestamp("subscribed_at").defaultNow().notNull(),
+  unsubscribedAt: timestamp("unsubscribed_at"),
+});
+
+export const insertNewsletterSubscriberSchema = createInsertSchema(newsletterSubscribers).omit({
+  id: true,
+  subscribedAt: true,
+  unsubscribedAt: true,
+});
+export type InsertNewsletterSubscriber = z.infer<typeof insertNewsletterSubscriberSchema>;
+export type NewsletterSubscriber = typeof newsletterSubscribers.$inferSelect;
+
+// Newsletter Issues (sent emails)
+export const newsletterIssueStatusEnum = pgEnum('newsletter_issue_status', [
+  'draft',
+  'scheduled',
+  'sending',
+  'sent',
+  'failed'
+]);
+
+export const newsletterIssues = pgTable("newsletter_issues", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  subject: text("subject").notNull(),
+  previewText: text("preview_text"),
+  htmlBody: text("html_body").notNull(),
+  textBody: text("text_body"),
+  status: newsletterIssueStatusEnum("status").default("draft").notNull(),
+  scheduledSendAt: timestamp("scheduled_send_at"),
+  sentAt: timestamp("sent_at"),
+  recipientCount: integer("recipient_count").default(0),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertNewsletterIssueSchema = createInsertSchema(newsletterIssues).omit({
+  id: true,
+  createdAt: true,
+  sentAt: true,
+  recipientCount: true,
+});
+export type InsertNewsletterIssue = z.infer<typeof insertNewsletterIssueSchema>;
+export type NewsletterIssue = typeof newsletterIssues.$inferSelect;

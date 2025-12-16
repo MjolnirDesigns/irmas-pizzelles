@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { Link } from 'wouter';
+import { useMutation } from '@tanstack/react-query';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+import { apiRequest } from '@/lib/queryClient';
 import { SiFacebook, SiInstagram, SiPinterest, SiTiktok, SiX } from 'react-icons/si';
-import { Mail, ArrowRight } from 'lucide-react';
+import { Mail, ArrowRight, Check, Loader2 } from 'lucide-react';
 
 function TruthSocialIcon({ className }: { className?: string }) {
   return (
@@ -73,15 +77,92 @@ const socialLinks = [
 const quickLinks = [
   { label: 'Shop', href: '/shop', testId: 'footer-link-shop' },
   { label: 'Our Story', href: '/about', testId: 'footer-link-about' },
+  { label: 'Recipes', href: '/recipes', testId: 'footer-link-recipes' },
   { label: 'FAQ', href: '/faq', testId: 'footer-link-faq' },
-  { label: 'Contact', href: '/contact', testId: 'footer-link-contact' },
 ];
 
 const legalLinks = [
+  { label: 'Nutrition Facts', href: '/nutrition', testId: 'link-nutrition' },
   { label: 'Privacy Policy', href: '/privacy', testId: 'link-privacy' },
   { label: 'Terms of Service', href: '/terms', testId: 'link-terms' },
-  { label: 'Shipping', href: '/shipping', testId: 'link-shipping' },
 ];
+
+function NewsletterForm() {
+  const [email, setEmail] = useState('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const { toast } = useToast();
+
+  const subscribeMutation = useMutation({
+    mutationFn: async (email: string) => {
+      const response = await apiRequest('POST', '/api/newsletter/subscribe', { email });
+      return response.json();
+    },
+    onSuccess: (data) => {
+      setIsSubscribed(true);
+      setEmail('');
+      toast({
+        title: "Welcome to the family!",
+        description: data.message || "You've successfully subscribed to our newsletter.",
+      });
+    },
+    onError: (error: Error) => {
+      // Extract the message from the error (format is "status: message")
+      const errorMessage = error.message.includes(':') 
+        ? error.message.split(': ').slice(1).join(': ')
+        : error.message;
+      toast({
+        title: "Subscription failed",
+        description: errorMessage || "Please try again later.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email && email.includes('@')) {
+      subscribeMutation.mutate(email);
+    }
+  };
+
+  if (isSubscribed) {
+    return (
+      <div className="flex items-center gap-2 text-primary">
+        <Check className="h-5 w-5" />
+        <span className="font-body-serif">Thank you for subscribing!</span>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex w-full lg:w-auto gap-2">
+      <Input
+        type="email"
+        placeholder="Enter your email address"
+        className="w-full lg:w-80"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        disabled={subscribeMutation.isPending}
+        data-testid="input-newsletter-email"
+      />
+      <Button 
+        type="submit" 
+        className="gap-2 whitespace-nowrap" 
+        disabled={subscribeMutation.isPending || !email}
+        data-testid="button-newsletter-submit"
+      >
+        {subscribeMutation.isPending ? (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        ) : (
+          <>
+            Subscribe
+            <ArrowRight className="h-4 w-4" />
+          </>
+        )}
+      </Button>
+    </form>
+  );
+}
 
 export default function Footer() {
   return (
@@ -107,18 +188,7 @@ export default function Footer() {
                 </p>
               </div>
             </div>
-            <div className="flex w-full lg:w-auto gap-2">
-              <Input
-                type="email"
-                placeholder="Enter your email address"
-                className="w-full lg:w-80"
-                data-testid="input-newsletter-email"
-              />
-              <Button className="gap-2 whitespace-nowrap" data-testid="button-newsletter-submit">
-                Subscribe
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </div>
+            <NewsletterForm />
           </div>
         </div>
       </div>
