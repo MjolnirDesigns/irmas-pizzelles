@@ -1,8 +1,16 @@
 import { Link } from 'wouter';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { SiFacebook, SiInstagram, SiPinterest } from 'react-icons/si';
+import { SiFacebook, SiInstagram, SiPinterest, SiTiktok, SiX } from 'react-icons/si';
+import { Mail, ArrowRight } from 'lucide-react';
+
+function TruthSocialIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm0-8H9V7h6v2z"/>
+    </svg>
+  );
+}
 
 function ItalianFlag() {
   return (
@@ -53,6 +61,28 @@ function HeritageStripe() {
   );
 }
 
+const socialLinks = [
+  { name: 'Facebook', icon: SiFacebook, href: '#', testId: 'link-facebook' },
+  { name: 'Instagram', icon: SiInstagram, href: '#', testId: 'link-instagram' },
+  { name: 'Pinterest', icon: SiPinterest, href: '#', testId: 'link-pinterest' },
+  { name: 'TikTok', icon: SiTiktok, href: '#', testId: 'link-tiktok' },
+  { name: 'Truth Social', icon: TruthSocialIcon, href: '#', testId: 'link-truth-social' },
+  { name: 'X', icon: SiX, href: '#', testId: 'link-x' },
+];
+
+const quickLinks = [
+  { label: 'Shop', href: '/shop', testId: 'footer-link-shop' },
+  { label: 'Our Story', href: '/about', testId: 'footer-link-about' },
+  { label: 'FAQ', href: '/faq', testId: 'footer-link-faq' },
+  { label: 'Contact', href: '/contact', testId: 'footer-link-contact' },
+];
+
+const legalLinks = [
+  { label: 'Privacy Policy', href: '/privacy', testId: 'link-privacy' },
+  { label: 'Terms of Service', href: '/terms', testId: 'link-terms' },
+  { label: 'Shipping', href: '/shipping', testId: 'link-shipping' },
+];
+
 export default function Footer() {
   return (
     <footer className="bg-card border-t">
@@ -60,99 +90,138 @@ export default function Footer() {
         <HeritageStripe />
       </div>
       
-      <div className="container mx-auto px-6 md:px-8 pt-12 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          <div>
-            <h3 className="font-serif text-xl font-bold mb-4" data-testid="footer-brand">Irma's Pizzelles</h3>
-            <p className="font-body-serif text-muted-foreground text-base leading-relaxed">
-              Handcrafted with love using traditional Italian recipes passed down through generations.
-            </p>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/shop" className="font-body-serif text-muted-foreground hover:text-foreground transition-colors" data-testid="footer-link-shop">
-                  Shop
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="font-body-serif text-muted-foreground hover:text-foreground transition-colors" data-testid="footer-link-about">
-                  Our Story
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq" className="font-body-serif text-muted-foreground hover:text-foreground transition-colors" data-testid="footer-link-faq">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="font-body-serif text-muted-foreground hover:text-foreground transition-colors" data-testid="footer-link-contact">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4">Newsletter</h4>
-            <p className="font-body-serif text-muted-foreground text-sm mb-3">
-              Subscribe for updates and special offers.
-            </p>
-            <div className="flex gap-2">
+      {/* Newsletter Section - Premium Banner */}
+      <div className="border-b">
+        <div className="container mx-auto px-6 md:px-8 py-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4 text-center lg:text-left">
+              <div className="hidden sm:flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                <Mail className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-serif text-lg font-semibold" data-testid="newsletter-title">
+                  Join the Irma's Family
+                </h3>
+                <p className="font-body-serif text-muted-foreground text-sm">
+                  Be the first to know about new flavors, recipes, and exclusive offers.
+                </p>
+              </div>
+            </div>
+            <div className="flex w-full lg:w-auto gap-2">
               <Input
                 type="email"
-                placeholder="Your email"
-                className="flex-1"
+                placeholder="Enter your email address"
+                className="w-full lg:w-80"
                 data-testid="input-newsletter-email"
               />
-              <Button data-testid="button-newsletter-submit">Join</Button>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4">Follow Us</h4>
-            <div className="flex gap-4">
-              <a
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Facebook"
-                data-testid="link-facebook"
-              >
-                <SiFacebook className="h-5 w-5" />
-              </a>
-              <a
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Instagram"
-                data-testid="link-instagram"
-              >
-                <SiInstagram className="h-5 w-5" />
-              </a>
-              <a
-                href="#"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Pinterest"
-                data-testid="link-pinterest"
-              >
-                <SiPinterest className="h-5 w-5" />
-              </a>
+              <Button className="gap-2 whitespace-nowrap" data-testid="button-newsletter-submit">
+                Subscribe
+                <ArrowRight className="h-4 w-4" />
+              </Button>
             </div>
           </div>
         </div>
+      </div>
 
-        <Separator className="mb-8" />
+      {/* Main Footer Content */}
+      <div className="container mx-auto px-6 md:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
+          {/* Brand Column */}
+          <div className="lg:col-span-4">
+            <h3 className="font-serif text-2xl font-bold mb-4" data-testid="footer-brand">
+              Irma's Pizzelles
+            </h3>
+            <p className="font-body-serif text-muted-foreground leading-relaxed mb-6">
+              Handcrafted with love using traditional Italian recipes passed down through four generations. Every cookie tells a story of heritage and dedication.
+            </p>
+            {/* Social Media */}
+            <div>
+              <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-muted-foreground">
+                Follow Us
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.name}
+                    href={social.href}
+                    className="flex items-center justify-center h-9 w-9 rounded-md bg-muted/50 text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+                    aria-label={social.name}
+                    data-testid={social.testId}
+                  >
+                    <social.icon className="h-4 w-4" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p className="font-body-serif" data-testid="text-copyright">&copy; {new Date().getFullYear()} Irma's Pizzelles. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link href="/privacy" className="font-body-serif hover:text-foreground transition-colors" data-testid="link-privacy">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="font-body-serif hover:text-foreground transition-colors" data-testid="link-terms">
-              Terms of Service
-            </Link>
+          {/* Quick Links */}
+          <div className="lg:col-span-2 lg:col-start-6">
+            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-muted-foreground">
+              Quick Links
+            </h4>
+            <ul className="space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="font-body-serif text-foreground hover:text-primary transition-colors"
+                    data-testid={link.testId}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal Links */}
+          <div className="lg:col-span-2">
+            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-muted-foreground">
+              Information
+            </h4>
+            <ul className="space-y-3">
+              {legalLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="font-body-serif text-foreground hover:text-primary transition-colors"
+                    data-testid={link.testId}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div className="lg:col-span-3">
+            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-muted-foreground">
+              Get in Touch
+            </h4>
+            <div className="space-y-3 font-body-serif">
+              <p className="text-foreground" data-testid="footer-email">
+                hello@irmaspizzelles.com
+              </p>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Questions about your order or wholesale inquiries? We'd love to hear from you.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t">
+        <div className="container mx-auto px-6 md:px-8 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+            <p className="font-body-serif" data-testid="text-copyright">
+              &copy; {new Date().getFullYear()} Irma's Pizzelles. All rights reserved.
+            </p>
+            <p className="font-body-serif italic text-xs">
+              Made with love in the USA
+            </p>
           </div>
         </div>
       </div>
