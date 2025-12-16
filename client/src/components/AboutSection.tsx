@@ -23,34 +23,27 @@ export default function AboutSection() {
             <motion.div variants={staggerItemVariants} data-testid="text-about-origins">
               <h3 className="font-serif text-xl font-semibold tracking-wide mb-2">Origins</h3>
               <p className="font-body-serif text-base md:text-lg text-muted-foreground leading-relaxed">
-                Our story begins in the sun-drenched hills of Calabria, Italy, where Irma first learned the 
-                ancient art of pizzelle-making at her grandmother's side. In those humble kitchens, the 
-                intoxicating aroma of anise and vanilla filled the air as generation after generation 
-                perfected the family recipe. These delicate Italian dessert cookies quickly became 
-                treasured favorites among the many grandchildren, and word of their exceptional taste 
-                spread throughout the region.
+                Our story begins in the sun-drenched hills of Calabria, Italy, where Irma learned 
+                pizzelle-making at her grandmother's side. These delicate cookies became treasured 
+                favorites among the grandchildren, and the family recipe spread throughout the region.
               </p>
             </motion.div>
             
             <motion.div variants={staggerItemVariants} data-testid="text-about-tradition">
               <h3 className="font-serif text-xl font-semibold tracking-wide mb-2">Tradition</h3>
               <p className="font-body-serif text-base md:text-lg text-muted-foreground leading-relaxed">
-                In the early 1920s, amidst the upheaval of the First World War, Irma and her family 
-                made the courageous journey across the Atlantic to America. Though they left their 
-                homeland behind, they carried with them something precious: the time-honored recipe 
-                and cherished traditions that would bring the warmth of Calabria to their new home 
-                and share that joy with countless others.
+                In the early 1920s, during the First World War, Irma and her family journeyed to 
+                America. They carried with them something precious: the time-honored recipe that 
+                would bring the warmth of Calabria to their new home.
               </p>
             </motion.div>
             
             <motion.div variants={staggerItemVariants} data-testid="text-about-promise">
               <h3 className="font-serif text-xl font-semibold tracking-wide mb-2">Our Promise</h3>
               <p className="font-body-serif text-base md:text-lg text-muted-foreground leading-relaxed">
-                Today, Irma's legacy lives on at the heart of our family business. We remain devoted 
-                to crafting each pizzelle with the same care and passion she brought to her kitchen 
-                over a century ago. Using only the finest ingredients and honoring the techniques 
-                passed down through generations, we pour love into every batch we create. From our 
-                famiglia to yours, we invite you to taste a piece of our heritage.
+                Today, Irma's legacy lives on at the heart of our family business. Using only the 
+                finest ingredients and techniques passed down through generations, we pour love into 
+                every batch. From our famiglia to yours, taste a piece of our heritage.
               </p>
             </motion.div>
           </StaggerContainer>
