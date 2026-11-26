@@ -1,0 +1,78 @@
+IRMA'S PIZZELLE - LABEL COPY (DESIGN-READY, REVISED 2026-11-26)
+================================================================
+Status: DRAFT. Nutrition values are USDA-based estimates; confirm by lab test (Eurofins / AGT)
+before printing for retail. Items in [brackets] are placeholders to fill in or confirm.
+
+----------------------------------------------------------------
+FRONT PANEL (principal display panel)
+----------------------------------------------------------------
+IRMA'S PIZZELLE                      <- brand wordmark, top
+PIZZELLE                             <- statement of identity, bold, center
+(or: ITALIAN WAFER COOKIES)
+ANISE   |   VANILLA                  <- flavor line (print the one in the pack)
+
+Net quantity (bottom 30% of front panel, parallel to base):
+  6-pack:  Net Wt 4.2 oz (119 g)     [placeholder: 6 x ~20 g; weigh and use the LOWEST typical weight]
+  12-pack: Net Wt 8.4 oz (238 g)     [placeholder: 12 x ~20 g]
+  Minimum type height for net quantity (21 CFR 101.105(i)):
+    6-pack PDP (6in dia x 3in cylinder, 40% of side = ~22.6 sq in): 1/8 in
+    12-pack PDP (6in dia x 6in cylinder, ~45 sq in) or round lid (~28 sq in): 3/16 in
+
+Do NOT print "organic" or the USDA Organic seal on the front panel.
+UPC barcode: info/back panel (retail / Fresh Market version only).
+
+----------------------------------------------------------------
+INFORMATION PANEL
+----------------------------------------------------------------
+Nutrition Facts
+6 servings per container   (12-pack: 12 servings per container)
+Serving size        1 pizzelle ([20] g)
+
+Amount per serving
+Calories                         80
+                               % Daily Value*
+Total Fat 3.5g                       4%
+   Saturated Fat 2g                 10%
+   Trans Fat 0g
+Cholesterol 30mg                    10%
+Sodium 110mg                         5%
+Total Carbohydrate 10g               4%
+   Dietary Fiber 0g                  0%
+   Total Sugars 4g
+      Includes 4g Added Sugars       8%
+Protein 2g
+-----------------------------------------
+Vitamin D 0mcg 0%  *  Calcium [0mg 0%]  *  Iron [0mg 0%]  *  Potassium [0mg 0%]
+   [lab to confirm Calcium / Iron / Potassium; eggs and flour may push these to 2%]
+
+* The % Daily Value (DV) tells you how much a nutrient in a serving of food
+contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.
+
+INGREDIENTS (default, no organic wording - recommended):
+Unbleached Wheat Flour, Eggs, Cane Sugar, Butter (Cream), Contains 2% or less of:
+Baking Powder ([Corn Starch, Sodium Bicarbonate, Sodium Aluminum Sulfate, Monocalcium Phosphate]
+- COPY THE EXACT LIST FROM YOUR BAKING POWDER CAN), Anise Extract ([Alcohol, Water, Oil of Anise]
+- copy from bottle).
+   Vanilla version: replace the last item with "Vanilla Extract".
+
+INGREDIENTS (optional, allowed only in the ingredient list, with 3 years of purchase records):
+Organic Unbleached Wheat Flour, Organic Eggs, Organic Cane Sugar, Butter (Cream), Contains 2% or
+less of: Baking Powder (...), Anise Extract (...).
+
+CONTAINS: WHEAT, EGG, MILK.
+
+Irma's Pizzelles LLC
+[Street address, City, FL ZIP]
+irmaspizzelles.com
+
+Store in an airtight container in a cool, dry place.
+
+COTTAGE FOOD VERSION ONLY (required by F.S. 500.80(3)(g); at least 10-point type, high contrast):
+Made in a cottage food operation that is not subject to Florida's food safety regulations.
+   (Remove this line on the commercial-kitchen / Fresh Market version.)
+
+----------------------------------------------------------------
+BACK / SIDE (optional)
+----------------------------------------------------------------
+Made in small batches with Kerrygold grass-fed Irish butter.
+[Irma's origin story - 2-3 sentences]
