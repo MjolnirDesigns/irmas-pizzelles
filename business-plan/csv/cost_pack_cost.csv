@@ -1,0 +1,15 @@
+Cost per Pack - 6-pack (Packaging Decor 1141) and 12-pack (1142),,,,,,,,
+,,,,,,,,
+Pack,6-pack,6-pack,6-pack,6-pack,12-pack,12-pack,12-pack,12-pack
+Flavor,Anise,Anise,Vanilla,Vanilla,Anise,Anise,Vanilla,Vanilla
+Packaging scenario,Low,High,Low,High,Low,High,Low,High
+Cookies per pack,6,6,6,6,12,12,12,12
+Cookie cost (ingredients+energy+labor),1.0536,1.0536,0.899,0.899,2.1071,2.1071,1.7981,1.7981
+Clear PET container,0.15,0.25,0.15,0.25,0.25,0.45,0.25,0.45
+Printed BOPP labels,0.54,0.692,0.54,0.692,0.54,0.692,0.54,0.692
+Parchment liners,0.1274,0.1274,0.1274,0.1274,0.2547,0.2547,0.2547,0.2547
+Total cost per pack,1.8709,2.1229,1.7164,1.9683,3.1518,3.5038,2.8427,3.1947
+Cost per cookie (packed),0.3118,0.3538,0.2861,0.3281,0.2627,0.292,0.2369,0.2662
+Cost per dozen equivalent,3.7418,4.2458,3.4327,3.9367,3.1518,3.5038,2.8427,3.1947
+,,,,,,,,
+"Low = 1,000-label run + low container price; High = 500-label run + high container price. 1141/1142 prices are not public (call Packaging Decor 855-990-8274).",,,,,,,,

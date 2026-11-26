@@ -1,0 +1,71 @@
+Irma's Pizzelle - Cost Inputs & Sources (plain USD),,,,,
+"Blue = editable input. Type column says whether the number was looked up (with URL and date), is the user's figure, or is an assumption to confirm.",,,,,
+,,,,,
+Input,Value,Unit,Basis / note,Type,Source URL
+Recipe & yield,,,,,
+Cookies per batch,60,cookies,Current recipe yield (~60 five-inch pizzelle),User figure,
+Baked weight per cookie (placeholder),20,g,Est. 18-21 g; WEIGH 10 real cookies and replace,Assumed - confirm,
+User base ingredient costs (from Jan-2024 Cost Analysis tab),,,,,
+Eggs - 6 per batch,1.54,$/batch,$4.63 per 18 ct x 6 eggs (looks like conventional-egg pricing),User figure,
+Flour - 3.5 cups per batch,0.88,$/batch,$9.495 per 10 lb bag (= half of a Kirkland organic 2x10 lb),User figure,
+Sugar - 1.25 cups per batch,0.79,$/batch,$8.99 per 10 lb bag,User figure,
+Organic retail check (current Costco warehouse prices),,,,,
+"Kirkland Organic Free-Range Eggs, 24 ct",8.35,$/pack,Warehouse avg $8.35 (range $7.39-8.49); Same-Day $8.73,Looked up 2026-11-26,https://app.warehouserunner.com/costco/1068083-kirkland-signature-organic-free-range-egg-24-ct-large
+Eggs per pack,24,eggs,,Looked up 2026-11-26,
+"Kirkland Organic Unbleached AP Flour, 2 x 10 lb",16.63,$/pack,Warehouse avg $16.63 (range $15.69-17.99); Same-Day $21.10,Looked up 2026-11-26,https://app.warehouserunner.com/costco/1485523-kirkland-signature-organic-all-purpose-flour-2-10-lb
+Flour lb per pack,20,lb,,Looked up 2026-11-26,
+Flour grams per cup,125,g/cup,Standard AP flour conversion (spooned & leveled),Assumed - confirm,
+"Kirkland Organic Cane Sugar, 10 lb",11.99,$/bag,Warehouse typically $11.99 (some $10.49); Same-Day $13.61,Looked up 2026-11-26,https://app.warehouserunner.com/costco/901991-kirkland-signature-organic-cane-sugar-10-lb
+Sugar lb per bag,10,lb,,Looked up 2026-11-26,
+Sugar grams per cup,200,g/cup,Standard granulated sugar conversion,Assumed - confirm,
+"Use organic-check prices for eggs/flour/sugar? (1=yes, 0=no)",0,switch,0 keeps your base figures (default per brief),Input,
+Looked-up ingredient prices,,,,,
+"Kerrygold Unsalted Butter, 8 oz (2 sticks)",4.96,$/pack,Walmart $4.96 (62c/oz); foil 8 oz $4.68,Looked up 2026-11-26,https://www.walmart.com/ip/Kerrygold-Grass-Fed-Pure-Irish-Unsalted-Butter-8-oz-2-Sticks/184789958
+Butter oz per pack,8,oz,,Looked up 2026-11-26,
+Butter oz per batch,8,oz,1 cup = 2 sticks = 8 oz,User figure,
+"Clabber Girl Double Acting Baking Powder, 8.1 oz",2.64,$/can,Walmart $2.64; Kroger $2.89,Looked up 2026-11-26,https://www.walmart.com/ip/Clabber-Girl-Gluten-Free-Double-Acting-Baking-Powder-8-1-oz/10319293
+Baking powder oz per can,8.1,oz,,Looked up 2026-11-26,
+Baking powder grams per tsp,4.8,g/tsp,Label serving 1/8 tsp = 0.6 g,Assumed - confirm,
+Baking powder tsp per batch,4,tsp,,User figure,
+"McCormick Pure Anise Extract, 1 fl oz",2.66,$/bottle,Walmart $2.66; Amazon $2.62,Looked up 2026-11-26,https://www.walmart.com/ip/McCormick-Non-GMO-Gluten-Free-Pure-Anise-Extract-1-fl-oz-Box/10308873
+Anise fl oz per bottle,1,fl oz,,Looked up 2026-11-26,
+"Kirkland Pure Vanilla Extract, 16 fl oz",9.59,$/bottle,"Costco warehouse $9.59-9.69 (checked Nov 24, 2026); Same-Day $10.88",Looked up 2026-11-26,https://app.warehouserunner.com/costco/32911-kirkland-signature-pure-vanilla-16-oz
+Vanilla fl oz per bottle,16,fl oz,,Looked up 2026-11-26,
+Extract tbsp per batch,1.5,tbsp,,User figure,
+Tbsp per fl oz,2,tbsp,US measure,Fact,
+Optional production costs (inputs),,,,,
+Energy per batch (iron + mixer),0.15,$/batch,~1 kWh at ~$0.15/kWh,Assumed - confirm,
+"Labor hours per batch (mix, bake, cool, pack)",1.5,hr,2-cookie iron ~30 cycles + mixing + packing,Assumed - confirm,
+Labor rate (0 = owner labor unpaid),0,$/hr,Set to e.g. 15 to cost labor,Assumed - confirm,
+Packaging,,,,,
+Packaging Decor 1141 (6in x 3in PET) - low,0.15,$/unit,No public price (login wall; call 855-990-8274). Your ballpark.,User figure (ballpark),https://packagingdecor.com/clear-cylinder-box-4-sizes/
+Packaging Decor 1141 - high,0.25,$/unit,Your ballpark,User figure (ballpark),https://packagingdecor.com/clear-cylinder-box-4-sizes/
+Packaging Decor 1142 (6in x 6in PET) - low,0.25,$/unit,"Twice the height, so assumed above 1141",Assumed - confirm,https://packagingdecor.com/clear-cylinder-box-4-sizes/
+Packaging Decor 1142 - high,0.45,$/unit,Ref: Colorel 6in x 6in clear cylinder CAD $56/100 = CAD $0.56 (~US$0.40),Assumed - confirm,https://en.colorel.ca/products/transparent-cylinder-tube-boxes
+Printed labels per pack (front + info panel),2,labels,Front/lid label + Nutrition/ingredient panel,Assumed - confirm,
+"3in x 3in white BOPP labels, 1,000 qty total",269.99,$/order,"CustomGoods (Blue Label-type BOPP, 5-day production, ship incl.)",Looked up 2026-11-26,https://customgoods.com/product/custom-bopp-product-labels/
+"3in x 3in white BOPP labels, 500 qty total",172.99,$/order,Same source; 100 qty = $78.99,Looked up 2026-11-26,https://customgoods.com/product/custom-bopp-product-labels/
+"Label cost per label - low (1,000 qty)",0.27,$/label,,Formula,
+Label cost per label - high (500 qty),0.346,$/label,,Formula,
+Parchment roll price,12.99,$/roll,From Jan-2024 sheet,User figure,
+Parchment roll size,90,sq ft,Roll size not recorded; assumed 90 sq ft (Reynolds 45 sq ft is $6 at Walmart),Assumed - confirm,https://www.walmart.com/ip/Reynolds-Kitchens-Unbleached-Parchment-Paper-Roll-45-feet-x-12-inches-45/18874673836
+6in liner rounds per sq ft,4,rounds,Each 6x6 in square = 0.25 sq ft,Assumed - confirm,
+Cutting waste,0.15,%,,Assumed - confirm,
+Cost per liner round,0.0425,$/round,,Formula,
+Liners per 6-pack,3,rounds,One per 2 cookies,Assumed - confirm,
+Liners per 12-pack,6,rounds,One per 2 cookies,Assumed - confirm,
+Pricing & overhead,,,,,
+Price per dozen - low,8,$/dozen,Target range $8-12,User figure,
+Price per dozen - mid,10,$/dozen,,User figure,
+Price per dozen - high,12,$/dozen,,User figure,
+Small-pack premium on 6-pack,0.2,%,Typical small-pack premium; 6-pack = dozen/2 x (1+premium),Assumed - confirm,
+Annual overhead (SG&A),20000,$/yr,,User figure,
+Commercial kitchen & lab testing (sensitivity),,,,,
+Tampa shared kitchen - low,15,$/hr,"Tampa Bay Kitchen: $120/mo incl 8 hr, extra $15/hr; $560/mo incl 40 hr",Looked up 2026-11-26,https://www.tampabaykitchen.com/shared-kitchen--commissary.html
+Tampa shared kitchen - mid,20,$/hr,"Let's Cook Shared Kitchen: $194.99/mo min (8 hr), $20-24/hr tiers, $200 deposit",Looked up 2026-11-26,https://streetlegal.io/kitchens/florida/tampa/lets-cook-shared-kitchen
+Tampa shared kitchen - high,30,$/hr,"Pro Kitchen Hub Tampa: $25-36/hr, $150 fee, $500 deposit",Looked up 2026-11-26,https://www.thekitchendoor.com/kitchen-rental/pro-kitchen-hub-tampa
+Kitchen hours billed per batch,1.5,hr,Same as labor hours unless you run several irons,Assumed - confirm,
+Lab nutrition test per flavor - low,300,$/flavor,Eurofins / AGT ballpark,User figure,
+Lab nutrition test per flavor - high,600,$/flavor,,User figure,
+Flavors to test,2,flavors,Anise + Vanilla,User figure,
+Dozens to spread lab cost over,1000,dozens,~1 year at 20 dozen/week,Assumed - confirm,

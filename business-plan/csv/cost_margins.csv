@@ -1,0 +1,32 @@
+Gross Margin & Breakeven (materials only unless labor rate set on Inputs),,,,,,,,,
+,,,,,,,,,
+12-pack at dozen price,,,,,,,,,
+Price point,Pack price,GM $ Anise Low,GM $ Anise High,GM $ Vanilla Low,GM $ Vanilla High,GM % Anise Low,GM % Anise High,GM % Vanilla Low,GM % Vanilla High
+8,8,4.8482,4.4962,5.1573,4.8053,0.606,0.562,0.6447,0.6007
+10,10,6.8482,6.4962,7.1573,6.8053,0.6848,0.6496,0.7157,0.6805
+12,12,8.8482,8.4962,9.1573,8.8053,0.7373,0.708,0.7631,0.7338
+,,,,,,,,,
+6-pack - proportional (dozen price / 2),,,,,,,,,
+Price point,Pack price,GM $ Anise Low,GM $ Anise High,GM $ Vanilla Low,GM $ Vanilla High,GM % Anise Low,GM % Anise High,GM % Vanilla Low,GM % Vanilla High
+8,4,2.1291,1.8771,2.2836,2.0317,0.5323,0.4693,0.5709,0.5079
+10,5,3.1291,2.8771,3.2836,3.0317,0.6258,0.5754,0.6567,0.6063
+12,6,4.1291,3.8771,4.2836,4.0317,0.6882,0.6462,0.7139,0.6719
+,,,,,,,,,
+6-pack - with small-pack premium (dozen/2 x (1+premium)),,,,,,,,,
+Price point,Pack price,GM $ Anise Low,GM $ Anise High,GM $ Vanilla Low,GM $ Vanilla High,GM % Anise Low,GM % Anise High,GM % Vanilla Low,GM % Vanilla High
+8,4.8,2.9291,2.6771,3.0836,2.8317,0.6102,0.5577,0.6424,0.5899
+10,6,4.1291,3.8771,4.2836,4.0317,0.6882,0.6462,0.7139,0.6719
+12,7.2,5.3291,5.0771,5.4836,5.2317,0.7402,0.7052,0.7616,0.7266
+,,,,,,,,,
+Breakeven on annual overhead (12-pack basis),,,,,,,,,
+Annual overhead,20000,,,,,,,,
+Price point,Scenario,Contribution / dozen,Breakeven dozens / yr,Breakeven cookies / yr,Batches / yr,Dozens / week,Revenue at breakeven,,
+8,Anise High (worst),4.4962,4448.2138,53378.5656,889.6428,85.5426,35585.7104,,
+8,Vanilla Low (best),5.1573,3878.0279,46536.3345,775.6056,74.5775,31024.223,,
+10,Anise High (worst),6.4962,3078.7292,36944.7507,615.7458,59.2063,30787.2922,,
+10,Vanilla Low (best),7.1573,2794.3652,33532.3829,558.873,53.7378,27943.6524,,
+12,Anise High (worst),8.4962,2353.9972,28247.9666,470.7994,45.2692,28247.9666,,
+12,Vanilla Low (best),9.1573,2184.0593,26208.7116,436.8119,42.0011,26208.7116,,
+,,,,,,,,,
+"Breakeven ignores owner labor (labor rate = $0 on Inputs). At 1.5 hr/batch, see Batches/yr x 1.5 for unpaid hours.",,,,,,,,,
+"Unpaid hours/yr at $10/dozen, Anise High breakeven:",,,,,923.6188,,,,
