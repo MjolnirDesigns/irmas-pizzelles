@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { insertProductSchema, insertAddressSchema, insertWaitlistEntrySchema } from "@shared/schema";
 import { z } from "zod";
 import { generateUnsubscribeToken, sendWeeklyNewsletter } from "./newsletter-service";
+import { registerCommerceRoutes } from "./commerce";
 
 // Middleware to get user from session (if authenticated)
 async function getUser(req: Request) {
@@ -17,7 +18,8 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
-  
+  registerCommerceRoutes(app);
+
   // ============ PRODUCTS API ============
   
   // Get all products

@@ -33,6 +33,30 @@ export const insertUserSchema = createInsertSchema(users).omit({
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 
+// Customers (checkout / pre-order contacts — distinct from Replit auth users)
+export const customers = pgTable("customers", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  email: text("email").notNull().unique(),
+  firstName: text("first_name"),
+  lastName: text("last_name"),
+  phone: text("phone"),
+  preferredFlavor: text("preferred_flavor"),
+  preferredPackSize: text("preferred_pack_size"),
+  wouldReorderMonthly: boolean("would_reorder_monthly"),
+  thirdFlavorIdea: text("third_flavor_idea"),
+  marketingOptIn: boolean("marketing_opt_in").default(false),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const insertCustomerSchema = createInsertSchema(customers).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+export type InsertCustomer = z.infer<typeof insertCustomerSchema>;
+export type Customer = typeof customers.$inferSelect;
+
 // Customer Addresses
 export const addresses = pgTable("addresses", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -127,7 +151,17 @@ export const orders = pgTable("orders", {
   
   // Stripe
   stripePaymentIntentId: text("stripe_payment_intent_id"),
+  stripeCheckoutSessionId: text("stripe_checkout_session_id"),
   stripeCustomerId: text("stripe_customer_id"),
+  paymentState: text("payment_state").default("pending"),
+
+  // Pre-order / fulfillment (Asynd commerce)
+  customerId: varchar("customer_id").references(() => customers.id),
+  fulfillmentMethod: text("fulfillment_method"),
+  isPreorder: boolean("is_preorder").default(false),
+  earlyBirdPercent: decimal("early_bird_percent", { precision: 5, scale: 2 }),
+  batchLabel: text("batch_label"),
+  variant: text("variant"),
   
   // Shipping
   shippingName: text("shipping_name"),
@@ -171,6 +205,8 @@ export const orderItems = pgTable("order_items", {
   productPrice: decimal("product_price", { precision: 10, scale: 2 }).notNull(),
   quantity: integer("quantity").notNull(),
   total: decimal("total", { precision: 10, scale: 2 }).notNull(),
+  flavor: text("flavor"),
+  packSize: text("pack_size"),
 });
 
 export const insertOrderItemSchema = createInsertSchema(orderItems).omit({

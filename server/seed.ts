@@ -1,7 +1,10 @@
-import { db } from "./db";
+import { db, isDatabaseConfigured } from "./db";
 import { products, promotions } from "@shared/schema";
 
 export async function seedDatabase() {
+  if (!isDatabaseConfigured || !db) {
+    throw new Error("DATABASE_URL must be set to seed Postgres. The app can still run without it.");
+  }
   console.log("Seeding database...");
 
   // Check if products already exist
