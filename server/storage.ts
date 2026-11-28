@@ -1,7 +1,8 @@
-import { db } from "./db";
+import { db as maybeDb, isDatabaseConfigured } from "./db";
 import { eq, and, sql, desc } from "drizzle-orm";
 import {
   users, type User, type InsertUser,
+  customers, type Customer, type InsertCustomer,
   products, type Product, type InsertProduct,
   orders, type Order, type InsertOrder,
   orderItems, type OrderItem, type InsertOrderItem,
@@ -11,6 +12,10 @@ import {
   newsletterSubscribers, type NewsletterSubscriber, type InsertNewsletterSubscriber,
   newsletterIssues, type NewsletterIssue, type InsertNewsletterIssue,
 } from "@shared/schema";
+import { MemoryStorage } from "./memory-storage";
+
+// DatabaseStorage is only constructed when DATABASE_URL is set.
+const db = maybeDb as NonNullable<typeof maybeDb>;
 
 export interface IStorage {
   // Users
@@ -19,6 +24,11 @@ export interface IStorage {
   getUserByEmail(email: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   updateUser(id: string, data: Partial<InsertUser>): Promise<User | undefined>;
+
+  // Customers (pre-order / checkout contacts)
+  getCustomerByEmail(email: string): Promise<Customer | undefined>;
+  upsertCustomer(data: InsertCustomer): Promise<Customer>;
+  getCustomers(): Promise<Customer[]>;
   
   // Products
   getProducts(activeOnly?: boolean): Promise<Product[]>;
@@ -93,6 +103,30 @@ export class DatabaseStorage implements IStorage {
   async updateUser(id: string, data: Partial<InsertUser>): Promise<User | undefined> {
     const [user] = await db.update(users).set(data).where(eq(users.id, id)).returning();
     return user;
+  }
+
+  async getCustomerByEmail(email: string): Promise<Customer | undefined> {
+    const [customer] = await db.select().from(customers).where(eq(customers.email, email.toLowerCase()));
+    return customer;
+  }
+
+  async upsertCustomer(data: InsertCustomer): Promise<Customer> {
+    const email = data.email.toLowerCase();
+    const existing = await this.getCustomerByEmail(email);
+    if (existing) {
+      const [updated] = await db.update(customers).set({
+        ...data,
+        email,
+        updatedAt: new Date(),
+      }).where(eq(customers.id, existing.id)).returning();
+      return updated;
+    }
+    const [created] = await db.insert(customers).values({ ...data, email }).returning();
+    return created;
+  }
+
+  async getCustomers(): Promise<Customer[]> {
+    return db.select().from(customers).orderBy(desc(customers.createdAt));
   }
 
   // Products
@@ -270,4 +304,6 @@ export class DatabaseStorage implements IStorage {
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage: IStorage = isDatabaseConfigured
+  ? new DatabaseStorage()
+  : new MemoryStorage();

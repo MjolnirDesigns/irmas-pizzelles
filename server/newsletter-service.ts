@@ -2,6 +2,7 @@
 import { Resend } from 'resend';
 import OpenAI from 'openai';
 import { storage } from './storage';
+import { isDatabaseConfigured } from './db';
 import type { NewsletterSubscriber } from '@shared/schema';
 
 let connectionSettings: any;
@@ -40,10 +41,14 @@ async function getResendClient() {
 }
 
 // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
-const openai = new OpenAI({
-  baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
-  apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY
-});
+function getOpenAI(): OpenAI | null {
+  const apiKey = process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY;
+  if (!apiKey) return null;
+  return new OpenAI({
+    apiKey,
+    baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL || undefined,
+  });
+}
 
 interface NewsletterContent {
   subject: string;
@@ -79,6 +84,13 @@ Return the response as JSON with this exact structure:
   "callToAction": "special offer or CTA text",
   "signOff": "warm sign-off"
 }`;
+
+  const openai = getOpenAI();
+  if (!openai) {
+    throw new Error(
+      "OpenAI is not configured. Set AI_INTEGRATIONS_OPENAI_API_KEY or OPENAI_API_KEY to generate newsletter copy.",
+    );
+  }
 
   const response = await openai.chat.completions.create({
     model: "gpt-5",
@@ -256,13 +268,17 @@ export async function sendWeeklyNewsletter(): Promise<{ success: boolean; sentCo
     });
 
     // Update recipient count using raw SQL since it's not in the insert schema
-    const { db } = await import('./db');
-    const { newsletterIssues } = await import('@shared/schema');
-    const { eq } = await import('drizzle-orm');
-    await db.update(newsletterIssues).set({ 
-      recipientCount: sentCount,
-      sentAt: new Date()
-    }).where(eq(newsletterIssues.id, issue.id));
+    if (isDatabaseConfigured) {
+      const { db } = await import('./db');
+      const { newsletterIssues } = await import('@shared/schema');
+      const { eq } = await import('drizzle-orm');
+      if (db) {
+        await db.update(newsletterIssues).set({
+          recipientCount: sentCount,
+          sentAt: new Date()
+        }).where(eq(newsletterIssues.id, issue.id));
+      }
+    }
 
     return { success: true, sentCount, issueId: issue.id };
   } catch (error) {
